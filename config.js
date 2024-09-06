@@ -7,6 +7,7 @@ const dbConfig = {
   host: process.env.PG_HOST,
   port: process.env.PG_PORT,
   dialect: 'mysql',
+  jwtSecret: 'net-secret',
 };
 
 module.exports = { ...dbConfig };

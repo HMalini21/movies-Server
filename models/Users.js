@@ -13,7 +13,7 @@ module.exports = function model(sequelize, types) {
         type: types.STRING,
         allowNull: false,
       },
-      email: {
+      emailId: {
         type: types.STRING,
         allowNull: false,
       },

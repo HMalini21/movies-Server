@@ -1,9 +1,9 @@
 const db = require('../sequize-config');
 
-const getTvShows = async (req, res, next) => {
+const getFantasyMovies = async (req, res, next) => {
   try {
     const results = await db.sequelize.query(
-      'SELECT * FROM movies m INNER JOIN cat_movie cm ON m.id = cm.movieId WHERE cm.categoryId = 6',
+      'SELECT * FROM movies m INNER JOIN gen_movie gm ON m.id = gm.movieId WHERE gm.genereId = 1',
       {
         type: db.Sequelize.QueryTypes.SELECT,
         raw: true, // Return raw data, rather than objects
@@ -12,15 +12,15 @@ const getTvShows = async (req, res, next) => {
 
     res.status(200).json({ message: results });
   } catch (error) {
-    console.error('Error fetching TV shows:', error);
+    console.error('Error fetching fansty movies:', error);
     res.status(400).json({ error: error, message: error.message });
   }
 };
 
-const getMovie = async (req, res, next) => {
+const getScifiMovies = async (req, res, next) => {
   try {
     const results = await db.sequelize.query(
-      'SELECT * FROM movies m INNER JOIN cat_movie cm ON m.id = cm.movieId WHERE cm.categoryId = 1',
+      'SELECT * FROM movies m INNER JOIN gen_movie gm ON m.id = gm.movieId WHERE gm.genereId = 2',
       {
         type: db.Sequelize.QueryTypes.SELECT,
         raw: true, // Return raw data, rather than objects
@@ -29,15 +29,15 @@ const getMovie = async (req, res, next) => {
 
     res.status(200).json({ message: results });
   } catch (error) {
-    console.error('Error fetching Movie:', error);
+    console.error('Error fetching Sci-fi movies:', error);
     res.status(400).json({ error: error, message: error.message });
   }
 };
 
-const getAnime = async (req, res, next) => {
+const getRomComMovies = async (req, res, next) => {
   try {
     const results = await db.sequelize.query(
-      'SELECT * FROM movies m INNER JOIN cat_movie cm ON m.id = cm.movieId WHERE cm.categoryId = 4',
+      'SELECT * FROM movies m INNER JOIN gen_movie gm ON m.id = gm.movieId WHERE gm.genereId = 3',
       {
         type: db.Sequelize.QueryTypes.SELECT,
         raw: true, // Return raw data, rather than objects
@@ -46,15 +46,15 @@ const getAnime = async (req, res, next) => {
 
     res.status(200).json({ message: results });
   } catch (error) {
-    console.error('Error fetching Anime:', error);
+    console.error('Error fetching Romcom movies:', error);
     res.status(400).json({ error: error, message: error.message });
   }
 };
 
-const getKdrama = async (req, res, next) => {
+const getThrillerMovies = async (req, res, next) => {
   try {
     const results = await db.sequelize.query(
-      'SELECT * FROM movies m INNER JOIN cat_movie cm ON m.id = cm.movieId WHERE cm.categoryId = 3',
+      'SELECT * FROM movies m INNER JOIN gen_movie gm ON m.id = gm.movieId WHERE gm.genereId = 4',
       {
         type: db.Sequelize.QueryTypes.SELECT,
         raw: true, // Return raw data, rather than objects
@@ -63,15 +63,31 @@ const getKdrama = async (req, res, next) => {
 
     res.status(200).json({ message: results });
   } catch (error) {
-    console.error('Error fetching kdramas:', error);
+    console.error('Error fetching Thriller Movies:', error);
     res.status(400).json({ error: error, message: error.message });
   }
 };
 
-const getSeries = async (req, res, next) => {
+const getHorrorMovies = async (req, res, next) => {
   try {
     const results = await db.sequelize.query(
-      'SELECT * FROM movies m INNER JOIN cat_movie cm ON m.id = cm.movieId WHERE cm.categoryId = 6',
+      'SELECT * FROM movies m INNER JOIN gen_movie gm ON m.id = gm.movieId WHERE gm.genereId = 5',
+      {
+        type: db.Sequelize.QueryTypes.SELECT,
+        raw: true, // Return raw data, rather than objects
+      },
+    );
+    res.status(200).json({ message: results });
+  } catch (error) {
+    console.error('Error fetching Horror Movies:', error);
+    res.status(400).json({ error: error, message: error.message });
+  }
+};
+
+const getComedyMovies = async (req, res, next) => {
+  try {
+    const results = await db.sequelize.query(
+      'SELECT * FROM movies m INNER JOIN gen_movie gm ON m.id = gm.movieId WHERE gm.genereId = 6',
       {
         type: db.Sequelize.QueryTypes.SELECT,
         raw: true, // Return raw data, rather than objects
@@ -80,33 +96,15 @@ const getSeries = async (req, res, next) => {
 
     res.status(200).json({ message: results });
   } catch (error) {
-    console.error('Error fetching Series:', error);
+    console.error('Error fetching Comedy Movies:', error);
     res.status(400).json({ error: error, message: error.message });
   }
 };
-
-const getHollywood = async (req, res, next) => {
-  try {
-    const results = await db.sequelize.query(
-      'SELECT * FROM movies m INNER JOIN cat_movie cm ON m.id = cm.movieId WHERE cm.categoryId = 5',
-      {
-        type: db.Sequelize.QueryTypes.SELECT,
-        raw: true, // Return raw data, rather than objects
-      },
-    );
-
-    res.status(200).json({ message: results });
-  } catch (error) {
-    console.error('Error fetching Hollywood:', error);
-    res.status(400).json({ error: error, message: error.message });
-  }
-};
-
 module.exports = {
-  getTvShows,
-  getMovie,
-  getAnime,
-  getKdrama,
-  getSeries,
-  getHollywood,
+  getFantasyMovies,
+  getScifiMovies,
+  getRomComMovies,
+  getThrillerMovies,
+  getHorrorMovies,
+  getComedyMovies,
 };

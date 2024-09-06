@@ -1,10 +1,28 @@
 const { models } = require('../sequize-config');
+const { Op } = require('sequelize');
+
+const searchMovie = async (req, res) => {
+  const searchQuery = req.query.q;
+
+  try {
+    const results = await models.Movie.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${searchQuery}%`,
+        },
+      },
+    });
+    res.json(results);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
 
 // Post (Create a new movie)
 const addMovies = async (req, res, next) => {
   try {
     const addMovie = await models.Movie.create(req.body);
-    res.status(201).json(addMovie);
+    res.status(201).json({ message: 'movie added successfully', data: addMovie });
   } catch (error) {
     return next({
       status: 400,
@@ -22,7 +40,7 @@ const getOneMovie = async (req, res, next) => {
     if (!getOneMovie) {
       return res.status(404).json({ message: 'Movie not found' });
     }
-    res.json(getOneMovie);
+    res.status(200).json({ message: getOneMovie });
   } catch (error) {
     return next({
       status: 400,
@@ -34,7 +52,7 @@ const getOneMovie = async (req, res, next) => {
 const getMovies = async (req, res, next) => {
   try {
     const movies = await models.Movie.findAll(); // Use findAll if count is not needed
-    res.json(movies);
+    res.status(200).json({ message: movies });
   } catch (error) {
     return next({
       status: 400,
@@ -90,4 +108,5 @@ module.exports = {
   getOneMovie,
   getMovies,
   deleteMovie,
+  searchMovie,
 };
