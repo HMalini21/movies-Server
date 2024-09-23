@@ -62,6 +62,15 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+
+    Movie.belongsToMany(models.Genre, {
+      through: models.GenreMovie,
+      foreignKey: 'movieId',
+      otherKey: 'genereId',
+      as: 'generes',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   };
 
   return Movie;

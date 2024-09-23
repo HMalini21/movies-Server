@@ -18,9 +18,15 @@ const getTvShows = async (req, res, next) => {
 };
 
 const getMovie = async (req, res, next) => {
+  // let category;
+  // if (req.query) {
+  let category = req.query.category;
+  // } else {
+  //   category = 1;
+  // }
   try {
     const results = await db.sequelize.query(
-      'SELECT * FROM movies m INNER JOIN cat_movie cm ON m.id = cm.movieId WHERE cm.categoryId = 1',
+      `SELECT * FROM movies m INNER JOIN cat_movie cm ON m.id = cm.movieId WHERE cm.categoryId = ${category}`,
       {
         type: db.Sequelize.QueryTypes.SELECT,
         raw: true, // Return raw data, rather than objects

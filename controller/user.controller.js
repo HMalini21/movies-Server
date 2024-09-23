@@ -19,10 +19,10 @@ const Login = async (req, res, next) => {
         id: getLoginUser.id,
         userName: getLoginUser.userName,
       };
-      // const generate_token = jwt.sign(payload, config.jwtSecret);
+      const generate_token = jwt.sign(payload, config.jwtSecret);
 
       return res.json({
-        getLoginUser,
+        generate_token,
       });
     }
     return res.status(403).json({ message: 'Invalid User' });

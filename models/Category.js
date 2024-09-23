@@ -25,8 +25,8 @@ module.exports = function model(sequelize, types) {
       foreignKey: 'categoryId',
       otherKey: 'movieId',
       as: 'movies',
-      onDelete: 'CASCADE', // Delete join table records when a category is deleted
-      onUpdate: 'CASCADE', // Update join table records when a category is updated
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   };
 

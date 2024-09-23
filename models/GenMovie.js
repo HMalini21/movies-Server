@@ -12,14 +12,14 @@ module.exports = function model(sequelize, types) {
       genereId: {
         type: types.INTEGER,
         references: {
-          model: 'Movie',
+          model: 'Genre',
           key: 'id',
         },
       },
       MovieId: {
         type: types.INTEGER,
         references: {
-          model: 'Genre',
+          model: 'Movie',
           key: 'id',
         },
       },

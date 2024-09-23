@@ -18,16 +18,15 @@ module.exports = function model(sequelize, types) {
       timestamps: false,
     },
   );
-
-  // Genre.associate = (models) => {
-  //   Genre.belongToMany(models.Movie, {
-  //     through: models.Genmovies,
-  //     foreignKey: 'genereId',
-  //     otherKey: 'movieId',
-  //     as: 'movies',
-  //     onDelete: 'CASCADE',
-  //     onUpdate: 'CASCADE',
-  //   });
-  // };
+  Genre.associate = (models) => {
+    Genre.belongsToMany(models.Movie, {
+      through: models.GenreMovie,
+      foreignKey: 'genereId',
+      otherKey: 'movieId',
+      as: 'movies',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+  };
   return Genre;
 };

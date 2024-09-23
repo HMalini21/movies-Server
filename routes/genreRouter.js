@@ -1,20 +1,8 @@
-// const express = require('express');
-// const {
-//   getFantasyMovies,
-//   getScifiMovies,
-//   getRomComMovies,
-//   getThrillerMovies,
-//   getHorrorMovies,
-//   getComedyMovies,
-// } = reuire('../controller/genre.controller');
+const express = require('express');
+const { getMoviesByGenreAndCategory } = require('../controller/genre.controller');
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get(getFantasyMovies);
-// router.get(getScifiMovies);
-// router.get(getRomComMovies);
-// router.get(getThrillerMovies);
-// router.get(getHorrorMovies);
-// router.get(getComedyMovies);
+router.get('/category-genre', getMoviesByGenreAndCategory);
 
-// module.exports = router;
+module.exports = router;
